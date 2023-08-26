@@ -28,10 +28,10 @@ public class BatteryServiceImpl implements BatteryService {
     private BatteryRepository repository;
 
     @Override
-    public void register(Battery battery) {
-        LOGGER.info("** Battery name : " + battery.getName());
-        Battery b = repository.save(battery);
-        System.out.println("Battery id : " + b.toString());
+    public Battery register(Battery battery) {
+        Battery item = repository.save(battery);
+        LOGGER.info("New Battery registered : " + battery.toString());
+        return item;
     }
 
     @Override

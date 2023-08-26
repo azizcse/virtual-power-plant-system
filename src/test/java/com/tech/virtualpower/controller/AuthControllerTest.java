@@ -18,6 +18,6 @@ public class AuthControllerTest {
     private UserRepository userRepository;
     @BeforeEach
     public void setUp(){
-        this.mockMvc = standaloneSetup(new AuthController(userRepository)).build();
+
     }
 }

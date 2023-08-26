@@ -4,7 +4,7 @@
 To run this application Your local environment must have 
 
 1. Java 11+
-2. Apache Kafak
+2. Apache kafka_2.13-3.5.0
 3. Redis
 
 ## Steps to Setup
@@ -20,7 +20,9 @@ Download Kafka
 ```bash
 https://www.apache.org/dyn/closer.cgi?path=/kafka/3.5.0/kafka_2.13-3.5.0.tgz
 ```
+### Kafka with ZooKeeper
 + Open new terminal and run `bin/zookeeper-server-start.sh config/zookeeper.properties` to start ZooKeeper service
+### Start the Kafka broker service
 + Open another new terminal and run `bin/kafka-server-start.sh config/server.properties` to start kafka service
 + To Clear Kafka cache and logs run `  rm -rf /tmp/kafka-logs /tmp/zookeeper /tmp/kraft-combined-logs`
 
@@ -184,13 +186,14 @@ size=30 (Optional)
   > Apache kafka works as a distributed microservices
 
 **Along with unit tests, provide integration and end-to-end tests.**
-  >Added
+  >Added Service class unite test, that not cover all the source
+  > Because of time limit not able to cover all. 
 
 **Implement a CI/CD pipeline for automated testing and deployment.**
   >In progress
 
 **Containerize the application using Docker and provide Kubernetes manifests for deployment.**
-  > In progress 
+  > Docker file added to create docker Image and run it in docker container
 
 **Use Swagger or a similar tool for API documentation.**
   > In progress

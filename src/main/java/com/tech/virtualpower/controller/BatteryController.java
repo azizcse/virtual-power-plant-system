@@ -41,12 +41,11 @@ public class BatteryController {
 
     @PostMapping("/register")
     public ResponseEntity<BatteryRegisterResponse> registerBattery(@Valid @RequestBody List<BatteryDto> batteryRequests) {
-        System.out.println("*** Register method called ***");
         startBackgroundRegistrationProcess(batteryRequests);
         return new ResponseEntity<>(new BatteryRegisterResponse(batteryRequests.size(), "Battery register progressing"), HttpStatus.OK);
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public ResponseEntity<PagedResponse<Battery>> getAll(
             @RequestParam(name = "page", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) Integer page,
             @RequestParam(name = "size", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) Integer size) {

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface BatteryService {
-    void register(Battery battery);
+    Battery register(Battery battery);
     List<BatteryDto> getAllBatteries();
     PagedResponse<Battery> getAll(int page, int size);
     Map<String, Object> getBatteriesInPostcodeRange(String startPostcode, String endPostcode, Integer min, Integer max);
