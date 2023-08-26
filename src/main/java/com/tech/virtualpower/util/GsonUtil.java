@@ -7,6 +7,10 @@ import com.tech.virtualpower.payload.BatteryDto;
 import java.lang.reflect.Type;
 import java.util.List;
 
+/**
+ * Generate  Json string from model or a list of model
+ * Convert Json String to Model and Model lsit
+ */
 public class GsonUtil {
     private static GsonUtil gsonUtil;
     private Gson gson;

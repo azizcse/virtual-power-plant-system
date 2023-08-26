@@ -144,11 +144,12 @@ size=30 (Optional)
 
 ## Comments on Recommended Features
 **Ensure the system can handle a large number of battery registrations concurrently.**
+### com.tech.virtualpower.manager.BackgroundTaskManager.java
   > Added Async custom background dispatcher queue named BackgroundTaskManager.java. 
   > That capable to handle large number of battery registration. Each registration request will just enqueued the list of battery registration task
 
 **Implement rate-limiting on the API to prevent misuse.**
-  > Under development
+  > Api rate limit can implement with Redis cache with user identifier 
 
 **Extend the postcode range query to allow filtering based on minimum or maximum watt capacity.**
   > Enhanced api capability /api/v1/battery/search
@@ -190,7 +191,7 @@ size=30 (Optional)
   > Because of time limit not able to cover all. 
 
 **Implement a CI/CD pipeline for automated testing and deployment.**
-  >In progress
+  >In progress (Having working experience with Travis CI for continuous integration )
 
 **Containerize the application using Docker and provide Kubernetes manifests for deployment.**
   > Docker file added to create docker Image and run it in docker container
@@ -202,4 +203,4 @@ size=30 (Optional)
   >API versioning added
 
 
-# Happy coding
+# Happy coding :)
