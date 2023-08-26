@@ -44,10 +44,10 @@ The app will start running at <http://localhost:8080>
 ### JWT Auth API
 
 
-| Method | Url                 | Decription | Sample Valid Request Body| 
-| ------ |---------------------| ---------- |--------------------------|
-| POST   | /api/v1/auth/signup | Sign up | [JSON](#signup)          |
-| POST   | /api/v1auth/signin  | Log in | [JSON](#signin)          |
+| Method | Url                 | Decription | Sample Valid Request Body | 
+| ------ |---------------------| ---------- |---------------------------|
+| POST   | /api/v1/auth/signup | Sign up | [JSON](#signup)              |
+| POST   | /api/v1auth/signin  | Log in | [JSON](#signin)               |
 
 ##### <a id="signup">Sign Up -> /api/v1/auth/signup</a>
 ```json
@@ -202,16 +202,4 @@ size=30 (Optional)
   >API versioning added
 
 
-### Kafka with ZooKeeper
-MAC/Linux
-$ bin/zookeeper-server-start.sh config/zookeeper.properties
-Windows
-$ bin\windows\zookeeper-server-start.bat config\zookeeper.properties
-
-### Start the Kafka broker service
-MAC/Linux
-$ bin/kafka-server-start.sh config/server.properties
-Windows
-$ bin\windows\kafka-server-start.bat config\server.properties
-
-  rm -rf /tmp/kafka-logs /tmp/zookeeper /tmp/kraft-combined-logs
+# Happy coding
