@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
         "capacity"
 })
 public class BatteryDto {
+    private Long id;
     @NotBlank
     @Size(min = 3, message = "Battery name must be minimum 3 characters")
     private String name;
@@ -26,6 +27,13 @@ public class BatteryDto {
     private int capacity;
 
     public BatteryDto(String name, String postcode, int capacity) {
+        this.name = name;
+        this.postcode = postcode;
+        this.capacity = capacity;
+    }
+
+    public BatteryDto(Long id,String name, String postcode, int capacity) {
+        this.id = id;
         this.name = name;
         this.postcode = postcode;
         this.capacity = capacity;
@@ -53,5 +61,13 @@ public class BatteryDto {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -17,16 +17,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
+import java.util.stream.Collectors;
 
 
 @RestController
+@EnableAsync
 @RequestMapping("/api/v1/battery")
 public class BatteryController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BatteryController.class);
@@ -40,9 +44,24 @@ public class BatteryController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<BatteryRegisterResponse> registerBattery(@Valid @RequestBody List<BatteryDto> batteryRequests) {
+    public ResponseEntity<List<BatteryDto>> registerBattery(@Valid @RequestBody List<BatteryDto> batteryRequests) {
         startBackgroundRegistrationProcess(batteryRequests);
-        return new ResponseEntity<>(new BatteryRegisterResponse(batteryRequests.size(), "Battery register progressing"), HttpStatus.OK);
+        List<CompletableFuture<BatteryDto>> futures = batteryRequests.stream()
+
+                .map(batteryDto -> CompletableFuture.supplyAsync(() -> {
+                    Battery battery = batteryService.register(new Battery(batteryDto.getName(), batteryDto.getPostcode(), batteryDto.getCapacity()));
+                    return new BatteryDto(battery.getId(), battery.getName(), battery.getPostcode(), battery.getCapacity());
+                }))
+
+                .collect(Collectors.toList());
+
+        List<BatteryDto> registeredBatteries = futures.stream()
+
+                .map(CompletableFuture::join)
+
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>(registeredBatteries, HttpStatus.OK);
     }
 
     @GetMapping("/getAll")
